@@ -2418,6 +2418,9 @@ In questa sezione partiamo da due rappresentazioni $\rho:G\to GL(V)$ e $\sigma:H
 		\item $\left.\rho^*\boxtimes\rho\right|_{diag(G)}:G\to GL(\End(V))$ è la rappresentazione per coniugio: $g\Phi\mapsto\rho(g)\Phi\rho(g)^{-1}$
 	\end{itemize}
 \end{exmp}
+\begin{note}
+	Nel seguito indicherò con $\rho^*\boxtimes\sigma$ anche la rappresentazione su $\Hom(V, W)$. Dal contesto dovrebbe sempre essere chiaro quale sia il codominio della rappresentazione.
+\end{note}
 
 $ $\\
 Caratterizziamo ora le rappresentazioni irriducibili di $G\times H$.
@@ -2459,7 +2462,7 @@ La prima parte di questo teorema si può anche dimostrare a partire dal seguente
 	\varphi_k(\tau(g)u) &= \varphi_k(\rho\boxtimes\sigma(g, e_H)(\sum_{j\in J} \varphi_j(u)\otimes w_j )) = \varphi_k( \sum_{j\in J}(\rho(g)\varphi_j(u))\otimes(\sigma(e_H)w_j) )=\\
 	&= \varphi_k( \sum_{j\in J}(\rho(g)\varphi_j(u))\otimes w_j ) = \rho(g)\varphi_k(u)
 	\end{align*}
-	Dato che $\tau, \rho$ sono irriducibili e tutte le $\varphi_j$ non sono costantemente nulle (per esempio se valutate in $v_1\otimes w_j$), quindi per il lemma di Schur $\varphi_j$ sono degli isomorfismi di rappresentazione e $\tau, \rho$ sono isomorfe. Sia $\Phi:V\to U$ un isomorfismo di rappresentazioni tra questi due spazi. Le funzioni $\varphi_j\circ\Phi:V\to V$ continuano ad essere isomorfismi di rappresentazione e dunque, per il lemma di Schur, sono della forma $\varphi_j\circ\Phi = \lambda_j \it{Id}$. Componendo a destra con l'inversa $\Psi$ di $\Phi$ si ottiene $\varphi_j = \lambda_j \Psi$.\\
+	Dato che $\tau, \rho$ sono irriducibili e tutte le $\varphi_j$ non sono costantemente nulle (per esempio se valutate in $v_1\otimes w_j$), quindi per il lemma di Schur $\varphi_j$ sono degli isomorfismi di rappresentazione e $\tau, \rho$ sono isomorfe. Sia $\Phi:V\to U$ un isomorfismo di rappresentazioni tra questi due spazi. Le funzioni $\varphi_j\circ\Phi:V\to V$ continuano ad essere isomorfismi di rappresentazione e dunque, per il lemma di Schur, sono della forma $\varphi_j\circ\Phi = \lambda_j \Id$. Componendo a destra con l'inversa $\Psi$ di $\Phi$ si ottiene $\varphi_j = \lambda_j \Psi$.\\
 	Considero ora $u\in U$:
 	\[
 	u=\sum_{j\in J} \varphi_j(u)\otimes w_j = \sum_{j\in J} \lambda_j \Psi(u)\otimes w_j = \Psi(u)\otimes\left(\sum_{j\in J} \lambda_j w_j\right) = \Psi(u)\otimes w_0
@@ -2481,9 +2484,49 @@ La prima parte di questo teorema si può anche dimostrare a partire dal seguente
 \begin{thm}
 	Al variare di $\rho$ rappresentazione irriducibile di $G$
 	\[
-	\hat{\rho}_{reg} = \sum_{\rho}\rho^*\boxtimes\rho
+	\hat{\rho}_{reg} \iso \sum_{\rho}\rho\boxtimes\rho^*
 	\]
 \end{thm}
+\begin{proof}
+	Sia $\rho:G\to GL(V_\rho)$ irriducibile. Definisco $T_\rho:\C[G]\to\End(V_\rho)$ come $T_\rho(e_g)=\rho(g)$ estesa per linearità. Verifico che $T_\rho$ è un omomorfismo di rappresentazioni con la rappresentazione $\rho\boxtimes\rho^*:G\to GL(V\otimes V^*)$, ricordando che $V\otimes V^*\iso\End(V)$:
+	\begin{align*}
+		T_\rho(\hat{\rho}_{reg}(g_1, g_2)e_h) &= T_\rho(e_{g_1 h g_2^{-1}}) =\\
+		&= \rho(g_1 h g_2^{-1}) =\\
+		&= \rho(g_1)\rho(h)\rho(g_2)^{-1}\\
+		&= \rho\boxtimes\rho^*(g_1, g_2)(\rho(h))=\rho\boxtimes\rho^*(g_1, g_2)T_\rho(e_h)
+	\end{align*}
+	Dato che $\rho$ è irriducibile lo è anche $\rho\boxtimes\rho^*$, dunque per il lemma di Schur $T_\rho$ è costantemente nulla oppure suriettiva. $T_\rho(e_e)=\rho(e)=\Id\neq0$, quindi $T_\rho$ è suriettiva. Se considero $\Ker(T_\rho)^\perp$ $G$-stabile, la restrizione $\left.T_\rho\right|_{\Ker(T_\rho)^\perp}$ è un'isomorfismo di rappresentazioni, quindi $\hat{\rho}_{reg}$ ha una sottorappresentazione isomorfa a $\rho\boxtimes\rho^*$.\\
+	Considero due rappresentazioni irriducibili e isomorfe $\rho\boxtimes\sigma \iso \rho'\boxtimes\sigma'$ di $G\times G$. Supponiamo per assurdo che $\rho\noniso\rho'$. Allora $deg(\rho)\cdot\rho\iso\left.\rho\boxtimes\sigma\right|_{G\times\lbrace1\rbrace}\iso\left.\rho'\boxtimes\sigma'\right|_{G\times\lbrace1\rbrace}\iso deg(\rho')\cdot\rho'$, ma questo è assurdo perché $\rho, \rho'$ sono irriducibili non isomorfe. Quindi $\rho\iso\rho'$, e similmente $\sigma\iso\sigma'$.\\
+	Se $\rho, \sigma$ sono due rappresentazioni irriducibili di $G$ non isomorfe allora $\rho\boxtimes\rho^* \noniso \sigma\boxtimes\sigma^*$, quindi nella somma
+	\[
+	\sum_\rho \rho\boxtimes\rho^*
+	\]
+	tutti i termini sono non isomorfi. Da un rapido calcolo di grado si ottiene
+	\[
+	deg(\hat{\rho}_{reg}) = |G| = \sum_\rho deg(\rho)^2 = \sum_\rho \dim(V_\rho)^2 = \sum_\rho \dim(\End(V_\rho)) = \sum_\rho deg(\rho\boxtimes\rho^*)
+	\]
+	quindi $\hat{\rho}_{reg}$ non contiene altre sottorappresentazioni.
+\end{proof}
+\begin{cor}
+	\[
+	\C[G]\iso \bigoplus\limits_\rho \End(V_\rho)
+	\]
+\end{cor}
+$ $\\
+Aggiungo una modo alternativo per trovare la sottorappresentazione isomorfa a $\rho\boxtimes\rho^*$ nel teorema precedente.
+\begin{proof}[Dimostrazione alternativa]
+	Consideriamo $\C^G=\lbrace f:G\to\C\rbrace$. C'è un isomorfismo canonico tra $\C^G$ e $\C[G]$ che manda $f\mapsto \sum_g f(g)e_g$; è facile verificare che tale isomorfismo è anche di rappresentazioni tra la rappresentazione $\hat{\rho}_{reg}$ su $\C[G]$ e la rappresentazione su $\C^G$ tale che $(g_1, g_2)f(h)=f(g_1^{-1}hg_2)$. Data $\rho$ irriducibile voglio trovare un isomorfismo tra $\End(V_\rho)$ e un sottospazio $G\times G$-stabile di $\C[G]$, ma grazie a due isomorfismi posso cercarlo in realtà tra $V_\rho\otimes V_\rho^*$ e $\C^G$.\\
+	Sia $\lbrace v_i\rbrace_{i\in I}$ una base di $V$, e sia $\lbrace v_i^*\rbrace_{i\in I}$ la base duale.
+	Definisco $S_\rho: V_\rho\otimes V_\rho^*\to\C^G$ tale che $S_\rho(v_i\otimes v_j^*)(g)=v_j^*(\rho(g)v_i)$ ed esteso per linearità. Verifico che $S_\rho$ è un omomorfismo di rappresentazioni:
+	\begin{align*}
+		S_\rho\left( \rho\boxtimes\rho^*(g_1, g_2)\sum_{(i, j)\in I^2} a_{ij}v_i\otimes v^*_j \right)(g) &= 	\sum_{(i, j)\in I^2} a_{ij} S_\rho(\rho(g_1)v_i\otimes\rho^*(g_2)v^*_j)(g) =\\
+		= \sum_{(i, j)\in I^2} a_{ij} \rho^*(g_2)v^*_j(\rho(g)\rho(g_1)v_i) &= \sum_{(i, j)\in I^2} a_{ij} v^*_j(\rho(g_2)^{-1}\rho(g)\rho(g_1)v_i) = \\
+		= S_\rho\left(\sum_{(i, j)\in I^2} a_{ij} v^*_j\otimes v_i\right)(g_2^{-1} g g_1) &= (g_1, g_2)S_\rho\left( \sum_{(i, j)\in I^2} a_{ij}v_i\otimes v^*_j \right)(g)
+	\end{align*}
+	Dato che $\rho$ è irriducibile lo è anche $\rho\boxtimes\rho^*$, quindi per il lemma di Schur e visto che $S_\rho(v_i\otimes v^*_i)(e_G)= v^*_i(\rho(e_G)v_i) = v^*_i(v_i) = 1 \neq 0$ deve essere $S_\rho$ iniettiva, quindi $S_\rho$ è un isomorfismo tra $V_\rho\otimes V_\rho^*$ e $\C^G$.
+\end{proof}
+
+
 
 
 

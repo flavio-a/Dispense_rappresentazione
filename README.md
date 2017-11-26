@@ -3,7 +3,7 @@
 
 Queste dispense servono come supporto per lo studio del corso di Introduzione alla Teoria della rappresentazione tenuto in SNS nell'anno 2017/2018.
 
-Queste dispense sono completamente basata su quelle scritte per l'anno 2016/2017, agli autori delle quali vanno i crediti per la maggior parte dei contenuti. Sono comunque state aggiornate e riorganizzate per rispecchiare le differenze tra i due corsi.
+Queste dispense sono completamente basate su quelle scritte per l'anno 2016/2017, agli autori delle quali vanno i crediti per la maggior parte dei contenuti. Sono comunque state aggiornate e riorganizzate per rispecchiare le differenze tra i due corsi.
 
 Consiglio di usare i pc del collegio per evitare problemi. Per scaricare il repository in generale dovete scegliere una cartella dove posizionarlo e poi digitare in console
 
