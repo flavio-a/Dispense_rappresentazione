@@ -50,7 +50,7 @@
 
 
 \title{Dispense del corso di Teoria delle Rappresentazioni}
-\author{Matematici e fisici del secondo anno, a.a. 2016/2017}
+\author{Matematici e fisici del secondo anno, a.a. 2017/2018}
 \date{\today}
 
 
@@ -150,7 +150,8 @@
 
 \newpage
 \section*{Introduzione}
-Qui dovremmo scrivere una introduzione, specificare quali sono le finalità e a chi sono rivolti determinati capitoli, eccetera.
+Queste dispense sono interamente basate sulle omonime dispense scritte dai matematici e fisici del secondo anno nel 2016/2017, che hanno quindi seguito questo corso l'anno precedente al nostro. La maggior parte dei contenuti sono stati presi dalle loro dispense, con solo l'aggiunta delle parti che noi abbiamo fatto e loro no.\\
+Queste dispense sono pensate come supporto allo studio del corso "Introduzione alla Teoria della Rappresentazione" del secondo anno in Normale tenuto nell'anno 2017/2018.
 
 
 \newpage
@@ -293,7 +294,7 @@ Nel caso del gruppo $GL_n(\C)$ due matrici stanno nella stessa classe di coniugi
 \end{defn}
 
 \begin{defn}[Prodotto diretto di gruppi]
-Siano $G$ e $H$ gruppi. Si definisce prodotto diretto di $G$ e $H$ il gruppo formato dall'insieme $G \times H = \{ (g, h) | g \in G, h \in H\}$ con l'operazione componente per componente, ovvero separatemente per i due gruppi di partenza.
+Siano $G$ e $H$ gruppi. Si definisce prodotto diretto di $G$ e $H$ il gruppo formato dall'insieme $G \times H = \{ (g, h) | g \in G, h \in H\}$ con l'operazione componente per componente, ovvero separatamente per i due gruppi di partenza.
 \end{defn}
 
 
@@ -2389,6 +2390,100 @@ Quindi è evidente che eseguendo molte iterazioni su ogni faccia viene approssim
 
 
 
+
+
+
+
+\newpage
+\section{Rappresentazioni del prodotto diretto}
+In questa sezione partiamo da due rappresentazioni $\rho:G\to GL(V)$ e $\sigma:H\to GL(W)$ e costruiamo una rappresentazione del loro prodotto diretto $G\times H$. Per tutta la sezione si supporranno $G$ e $H$ finiti.
+\begin{defn}[Prodotto tensore di rappresentazioni]
+	La rappresentazione del prodotto diretto $\rho\boxtimes\sigma:G\times H\to GL(V\otimes W)$ si definisce come $(g, h)\mapsto \rho(g)\otimes\sigma(h)$.
+\end{defn}
+\begin{prop}
+	$\rho\boxtimes\sigma$ è una rappresentazione.
+\end{prop}
+\begin{proof}
+	Le verifiche banali sono lasciate per esercizio.
+\end{proof}
+\begin{exmp}
+	Date le due rappresentazioni $\rho, \sigma$ come sopra si può definire una rappresentazione di $G\times H$ su $\Hom(V, W)$ "per coniugio", ovvero tale che $\Phi \mapsto \sigma(h)\Phi\rho(g)$. Dal teorema \ref{thm: isov*w} sappiamo però che $\Hom(V, W)\iso V^*\otimes W$, quindi vorremo capire che rappresentazione è quella che abbiamo appena definito su $V^*\otimes W$. Viene lasciata per esercizio la verifica che tale rappresentazione è $\rho^*\boxtimes\sigma$.\\
+	Per $G$ e $H$ esistono delle immersioni (a meno di isomorfismi) in $G\times H$: $G\iso G\times\lbrace e_H\rbrace$ e $H\iso\lbrace e_G\rbrace\times H$. Ci chiediamo quindi chi sono le rappresentazioni di $G$ e $H$ ottenute restringendo $\rho^*\boxtimes\sigma$ a questi sottogruppi:
+	\begin{itemize}
+		\item $\left.\rho^*\boxtimes\sigma\right|_{G\times\lbrace e_H\rbrace}:G\to GL(V^*\otimes W)$ è la rappresentazione $\dim(W)\cdot\rho^*$: $\varphi\otimes w \mapsto \rho^*(g)\varphi\otimes w$
+		\item $\left.\rho^*\boxtimes\sigma\right|_{\lbrace e_G\rbrace\times H}:H\to GL(V^*\otimes W)$ è la rappresentazione $\dim(V^*)\cdot\sigma$: $\varphi\otimes w \mapsto \varphi\otimes \sigma(g)w$
+	\end{itemize}
+	Nel caso particolare in cui $H=G$ e $\sigma=\rho$ esiste una terza immersione naturale di $G$ in $G\times G$: $G\iso diag(G) = \lbrace(g, g)\ |\ g\in G\rbrace$. La rappresentazione $\rho^*\boxtimes\rho$ ristretta a questo terzo sottogruppo diventa:
+	\begin{itemize}
+		\item $\left.\rho^*\boxtimes\rho\right|_{diag(G)}:G\to GL(\End(V))$ è la rappresentazione per coniugio: $g\Phi\mapsto\rho(g)\Phi\rho(g)^{-1}$
+	\end{itemize}
+\end{exmp}
+
+$ $\\
+Caratterizziamo ora le rappresentazioni irriducibili di $G\times H$.
+\begin{lemma}
+	$\chi_{\rho\boxtimes\sigma}(g, h)=\chi_\rho(g) \chi_\sigma(h)$.
+\end{lemma}
+\begin{proof}
+	Segue da \ref{thm: tracciaprodotto} dato che $\rho(g), \sigma(h)$ sono endomorfismi di $V, W$.
+\end{proof}
+\begin{thm}
+	\label{thm: prodotto irriducibili}
+	$\rho, \sigma$ irriducibili $\iff$ $\rho\boxtimes\sigma$ irriducibile. Inoltre tutte le rappresentazioni irriducibili di $G\times H$ sono della forma $\rho\boxtimes\sigma$ con $\rho, \sigma$ irriducibili.
+\end{thm}
+\begin{proof}
+	\begin{align*}
+	\langle \chi_{\rho\boxtimes\sigma} | \chi_{\rho\boxtimes\sigma} \rangle &= \frac{1}{|G\times H|}\sum_{(g, h)\in G\times H}\chi_{\rho\boxtimes\sigma}((g, h))\overline{\chi_{\rho\boxtimes\sigma}((g, h))} = \\
+	&= \frac{1}{|G||H|}\sum_{g\in G}\sum_{h\in H}\chi_{\rho}(g)\chi_{\sigma}(h)\overline{\chi_{\rho}(g)}\overline{\chi_{\sigma}(h)} = \\
+	&= \left(\frac{1}{|G|}\sum_{g\in G}\chi_{\rho}(g)\overline{\chi_{\rho}(g)}\right) \left(\frac{1}{|H|}\sum_{h\in H}\chi_{\sigma}(h)\overline{\chi_{\sigma}(h)}\right)= \\
+	&= \langle \chi_{\rho} | \chi_{\rho} \rangle \langle \chi_{\sigma} | \chi_{\sigma} \rangle
+	\end{align*}
+	$\rho\boxtimes\sigma$ è irriducibile se e solo se $\langle \chi_{\rho\boxtimes\sigma} | \chi_{\rho\boxtimes\sigma} \rangle = 1$, cioè se sia $\langle \chi_{\rho} | \chi_{\rho} \rangle$ che $\langle \chi_{\sigma} | \chi_{\sigma} \rangle$ sono uguali 1, ovvero se $\rho, \sigma$ sono irriducibili.\\
+	Per dimostrare la seconda parte del teorema basta verificare che, con $\rho, \sigma$ irriducibili, vale
+	\[|G\times H| = \sum_{\rho, \sigma} deg^2(\rho\boxtimes\sigma)\]
+	Ma questo è vero perché
+	\[\sum_{\rho, \sigma} deg^2(\rho\boxtimes\sigma) = \sum_{\rho, \sigma} deg^2(\rho) deg^2(\sigma) = \sum_{\rho} deg^2(\rho) \sum_{\sigma} deg^2(\sigma) = |G||H|\]
+\end{proof}
+
+La prima parte di questo teorema si può anche dimostrare a partire dal seguente
+\begin{lemma}
+	Sia $U\subseteq V\otimes W$ stabile per $G\times\lbrace e_H\rbrace$ e irriducibile. Allora $\exists w_0\in W$ tale che $U=V\otimes\lbrace w_0\rbrace$.
+\end{lemma}
+\begin{proof}
+	Se $U=\lbrace0\rbrace = V\otimes 0$, quindi suppongo $U\neq\lbrace0\rbrace$.\\
+	Sia $\tau:G\to GL(U)$ la rappresentazione $\tau = \left.\rho\boxtimes\sigma\right|_{G\times\lbrace e_H\rbrace}$ su $U$. Per ipotesi su $U$ $\tau$ è irriducibile.\\
+	Siano $\lbrace v_i\rbrace_{i\in I}, \lbrace w_j\rbrace_{j\in J}$ una base di $V, W$ rispettivamente. Ogni $u\in U$ si può scrivere nella forma
+	\[\sum_{(i, j)\in I\times J} a_{ij}v_i\otimes w_j = \sum_{j\in J} \left(\sum_{i\in I} a_{ij}v_i\right) \otimes w_j\]
+	Definisco quindi $\varphi_j(u) = \sum_{i\in I}a_{ij}v_i$, e si verifica che queste applicazioni sono tutte lineari. Mostro ora che queste $\varphi_j:U\to V$ sono omomorfismi di rappresentazione:
+	\begin{align*}
+	\varphi_k(\tau(g)u) &= \varphi_k(\rho\boxtimes\sigma(g, e_H)(\sum_{j\in J} \varphi_j(u)\otimes w_j )) = \varphi_k( \sum_{j\in J}(\rho(g)\varphi_j(u))\otimes(\sigma(e_H)w_j) )=\\
+	&= \varphi_k( \sum_{j\in J}(\rho(g)\varphi_j(u))\otimes w_j ) = \rho(g)\varphi_k(u)
+	\end{align*}
+	Dato che $\tau, \rho$ sono irriducibili e tutte le $\varphi_j$ non sono costantemente nulle (per esempio se valutate in $v_1\otimes w_j$), quindi per il lemma di Schur $\varphi_j$ sono degli isomorfismi di rappresentazione e $\tau, \rho$ sono isomorfe. Sia $\Phi:V\to U$ un isomorfismo di rappresentazioni tra questi due spazi. Le funzioni $\varphi_j\circ\Phi:V\to V$ continuano ad essere isomorfismi di rappresentazione e dunque, per il lemma di Schur, sono della forma $\varphi_j\circ\Phi = \lambda_j \it{Id}$. Componendo a destra con l'inversa $\Psi$ di $\Phi$ si ottiene $\varphi_j = \lambda_j \Psi$.\\
+	Considero ora $u\in U$:
+	\[
+	u=\sum_{j\in J} \varphi_j(u)\otimes w_j = \sum_{j\in J} \lambda_j \Psi(u)\otimes w_j = \Psi(u)\otimes\left(\sum_{j\in J} \lambda_j w_j\right) = \Psi(u)\otimes w_0
+	\]
+	Dato che $\Psi$ è un isomorfismo tra $U$ e $V$ si ha la tesi.
+\end{proof}
+\begin{proof}[Dimostrazione alternativa di \ref{thm: prodotto irriducibili}]
+	Sia $U\subseteq V\otimes W$ un sottospazio stabile per $\rho\boxtimes\sigma$ diverso da $\lbrace0\rbrace$. Ovviamente $U$ è stabile per $\left.\rho\boxtimes\sigma\right|_{G\times\lbrace e_H\rbrace}$, dunque per il lemma $\exists w_0\in W$ tale che $V\otimes w_0 \subseteq U$. Definisco poi per ogni $v\in V$ il sottospazio $W(v)=\lbrace w\in W|\ v\otimes w\in U\rbrace$.\\
+	$\forall v\in V\ \ w_0\in W(v) \implies W(v)\neq 0$; inoltre preso $w\in W(v)$ vale $v\otimes\sigma(h)w=(\rho\boxtimes\sigma)(e_G, h)(v\otimes w)\in U$ perché $U$ è stabile, quindi $W(v)$ è stabile per $\sigma$.\\
+	Dato che $W$ è irriducibile gli unici sottospazi stabili sono $\lbrace0\rbrace$ e $W$, ma poiché $W(v)\neq\lbrace0\rbrace$ deve per forza essere $W(v)=W$. Da questo segue banalmente che $U=V\otimes W$, ovvero che non esistono sottospazi stabili non banali.
+\end{proof}
+
+\begin{defn}
+	Dato un gruppo $G$ possiamo definire un'azione di $G\times G$ su $G$ data da $(g_1, g_2)h=g_1 h g_2^{-1}$. Da questa azione possiamo definire una rappresentazione per permutazione di $\hat{\rho}_{reg}:G\times G\to GL(\C[G])$.
+\end{defn}
+\begin{rem}
+	Per quanto già visto la rappresentazione regolare di G $\rho_{reg} = \left.\hat{\rho}_{reg}\right|_{G\times\lbrace e_H\rbrace}$
+\end{rem}
+\begin{thm}
+	Al variare di $\rho$ rappresentazione irriducibile di $G$
+	\[
+	\hat{\rho}_{reg} = \sum_{\rho}\rho^*\boxtimes\rho
+	\]
+\end{thm}
 
 
 
@@ -4804,7 +4899,6 @@ Concludiamo con una formula che ci permette di calcolare la dimensione di una ra
 \begin{thm}[formula degli uncini]
 	Sia $\lambda$ una $n$-tabella, allora $$\dim V_\lambda=\frac{n!}{\prod_{i=1}^n\ell_i}$$ dove $\ell_i$ è la lunghezza dell'uncino che parte dalla casella $i$, ovvero il massimo percorso a L rovesciata che passa dalla casella $i$
 \end{thm}
-
 
 
 \end{document}
