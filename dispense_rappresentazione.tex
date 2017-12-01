@@ -50,7 +50,7 @@
 
 
 \title{Dispense del corso di Teoria delle Rappresentazioni}
-\author{Matematici e fisici del secondo anno, a.a. 2017/2018}
+\author{Matematici, fisici e informatico del secondo anno, a.a. 2017/2018}
 \date{\today}
 
 
@@ -286,6 +286,12 @@ Sia $G$ un gruppo, $x \in G$, la classe di coniugio di $x$ è l'insieme $\{ gxg^
 \begin{exmp}[Le classi di coniugio di $GL_n(\C)$]
 Nel caso del gruppo $GL_n(\C)$ due matrici stanno nella stessa classe di coniugio se e solo se sono simili, quindi per ogni classe di coniugio esiste un rappresentante canonico che è la forma di Jordan di una qualsiasi matrice nella classe (con opportune convenzioni sull'ordine dei blocchi e degli autovalori).
 \end{exmp}
+
+\begin{defn}[Centralizzatore di un elemento]
+	Sia $G$ un gruppo e $g\in G$ un elemento. Si chiama \emph{centralizzatore} di $g$ e si indica con $Z(g)$ il sottoinsieme di elementi di $G$ che commutano con $g$:
+	\[Z(g)=\{ h\in G\ |\ hg=gh \}\]
+	\`E immediato verificare che $Z(g)$ è un sottogruppo di $G$ per ogni $g$.
+\end{defn}
 
 \begin{defn}[Centro di un gruppo]
 	Sia $G$ un gruppo, il \emph{centro} di $G$ si indica con $Z(G)$ ed è il sottoinsieme degli elementi che commutano con tutto $G$:
@@ -2481,10 +2487,12 @@ La prima parte di questo teorema si può anche dimostrare a partire dal seguente
 \begin{rem}
 	Per quanto già visto la rappresentazione regolare di G $\rho_{reg} = \left.\hat{\rho}_{reg}\right|_{G\times\lbrace e_H\rbrace}$
 \end{rem}
+$ $\\
+Sia $Irr(G)=\{\rho \ |\ \rho\text{ è una rappresentazione irriducibile di }G \}$
 \begin{thm}
 	Al variare di $\rho$ rappresentazione irriducibile di $G$
 	\[
-	\hat{\rho}_{reg} \iso \sum_{\rho}\rho\boxtimes\rho^*
+	\hat{\rho}_{reg} \iso \sum_{\rho\in Irr(G)}\rho\boxtimes\rho^*
 	\]
 \end{thm}
 \begin{proof}
@@ -2499,17 +2507,17 @@ La prima parte di questo teorema si può anche dimostrare a partire dal seguente
 	Considero due rappresentazioni irriducibili e isomorfe $\rho\boxtimes\sigma \iso \rho'\boxtimes\sigma'$ di $G\times G$. Supponiamo per assurdo che $\rho\noniso\rho'$. Allora $deg(\rho)\cdot\rho\iso\left.\rho\boxtimes\sigma\right|_{G\times\lbrace1\rbrace}\iso\left.\rho'\boxtimes\sigma'\right|_{G\times\lbrace1\rbrace}\iso deg(\rho')\cdot\rho'$, ma questo è assurdo perché $\rho, \rho'$ sono irriducibili non isomorfe. Quindi $\rho\iso\rho'$, e similmente $\sigma\iso\sigma'$.\\
 	Se $\rho, \sigma$ sono due rappresentazioni irriducibili di $G$ non isomorfe allora $\rho\boxtimes\rho^* \noniso \sigma\boxtimes\sigma^*$, quindi nella somma
 	\[
-	\sum_\rho \rho\boxtimes\rho^*
+	\sum_{\rho\in Irr(G)} \rho\boxtimes\rho^*
 	\]
 	tutti i termini sono non isomorfi. Da un rapido calcolo di grado si ottiene
 	\[
-	deg(\hat{\rho}_{reg}) = |G| = \sum_\rho deg(\rho)^2 = \sum_\rho \dim(V_\rho)^2 = \sum_\rho \dim(\End(V_\rho)) = \sum_\rho deg(\rho\boxtimes\rho^*)
+	deg(\hat{\rho}_{reg}) = |G| = \sum_{\rho\in Irr(G)} deg(\rho)^2 = \sum_{\rho\in Irr(G)} \dim(V_\rho)^2 = \sum_{\rho\in Irr(G)} \dim(\End(V_\rho)) = \sum_{\rho\in Irr(G)} deg(\rho\boxtimes\rho^*)
 	\]
 	quindi $\hat{\rho}_{reg}$ non contiene altre sottorappresentazioni.
 \end{proof}
 \begin{cor}
 	\[
-	\C[G]\iso \bigoplus\limits_\rho \End(V_\rho)
+	\C[G]\iso \bigoplus\limits_{\rho\in Irr(G)} \End(V_\rho)
 	\]
 \end{cor}
 $ $\\
@@ -2526,7 +2534,41 @@ Aggiungo una modo alternativo per trovare la sottorappresentazione isomorfa a $\
 	Dato che $\rho$ è irriducibile lo è anche $\rho\boxtimes\rho^*$, quindi per il lemma di Schur e visto che $S_\rho(v_i\otimes v^*_i)(e_G)= v^*_i(\rho(e_G)v_i) = v^*_i(v_i) = 1 \neq 0$ deve essere $S_\rho$ iniettiva, quindi $S_\rho$ è un isomorfismo tra $V_\rho\otimes V_\rho^*$ e $\C^G$.
 \end{proof}
 
-
+Utilizzando il teorema appena dimostrato diamo una dimostrazione dell'ortogonalità della tavola dei caratteri per colonne.
+\begin{thm}
+	Comunque scelti $g, h\in G$ vale
+	\[
+	\sum_{\rho\in Irr(G)} \chi_\rho(g) \overline{\chi_\rho(h)} =
+	\begin{cases}
+		0 \quad \text{se } g, h \text{ sono coniugati} \\
+		|Z(g)| \quad \text{altrimenti}
+	\end{cases}
+	\]
+	dove $Z(g)$ è il centralizzatore di $g$.
+\end{thm}
+\begin{proof}
+	\begin{align*}
+		\sum_{\rho\in Irr(G)} \chi_\rho(g) \overline{\chi_\rho(h)} &= \sum_{\rho\in Irr(G)} \chi_\rho(g) \chi_{\rho^*}(h) = \\
+		&= \sum_{\rho\in Irr(G)} \chi_{\rho\boxtimes\rho^*}(g, h) = \\
+		&= \chi_{\hat{\rho}_{reg}}(g, h)
+	\end{align*}
+	Dato che $\hat{\rho}_{reg}$ è una rappresentazione per permutazione su $\C[G]$ le immagini degli elementi del gruppo sono matrici di permutazione, quindi $\chi_{\hat{\rho}_{reg}}(g_1, g_2)$ è il numero di punti fissi di $\hat{\rho}_{reg}(g_1, g_2)$, ovvero $|\{h\in G\ |\ g_1 h g_2^{-1} = h \}|$.\\
+	Un $\overline{h}\in G$ tale che $g_1 \overline{h} g_2^{-1} = \overline{h}$ esiste se e solo se $\overline{h}^{-1} g_1 \overline{h} = g_2$, ovvero se $g_1, g_2$ sono coniugati. Da questo segue subito che $g_1, g_2$ non sono coniugati $\chi_{\hat{\rho}_{reg}}(g_1, g_2) = |\{h\in G\ |\ g_1 h g_2^{-1} = h \}| = 0$. Se invece $g_1, g_2$ sono coniugati, ovvero se esiste $\overline{h}$, vale che
+	\[
+		\{h\in G\ |\ g_1 h g_2^{-1} = h \} = \{h\in G\ |\ g_1 = h g_2 h^{-1} \} =  \{h\in G\ |\ g_1 = h \overline{h} g_1 \overline{h}^{-1} h^{-1} \}
+	\]
+	Quindi l'applicazione $h\mapsto\overline{h} h$ è una biezione tra $Z(g)$ e $\{h\in G\ |\ g_1 h g_2^{-1} = h \}$, perciò questi due insiemi hanno la stessa cardinalità.
+\end{proof}
+\begin{cor}
+	Le colonne della tabella dei caratteri sono ortogonali.
+\end{cor}
+\begin{proof}
+	Ogni colonna della tabella dei caratteri corrisponde ad una diversa classe di coniugo quindi, detti $g$ e $h$ rappresentanti di due colonne diverse, $g$ e $h$ non sono coniugati e quindi
+	\[
+		\sum_{\rho\in Irr(G)} \chi_\rho(g) \overline{\chi_\rho(h)} = 0
+	\]
+	dove la prima somma è proprio il prodotto hermitiano standard di $\C^n$ tra le due colonne di $g$ e $h$.
+\end{proof}
 
 
 
